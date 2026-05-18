@@ -1,0 +1,34 @@
+# Success: default request
+GET http://localhost:5000
+
+###
+
+# Success: count request
+GET http://localhost:5000?count=10
+
+###
+
+# Failure: 400, Count is not a number
+GET http://localhost:5000?count=fifteen
+
+###
+
+# Failure: 400, Count is not an integer
+GET http://localhost:5000?count=5.4
+
+###
+
+# Success: range request
+GET http://localhost:5000?range=1%2c100
+
+###
+
+# Failure: not a numeric range
+GET http://localhost:5000?range=one%2coneHundred
+
+###
+
+# Failure: too many values
+GET http://localhost:5000?range=1%2c100%2c15
+
+###
