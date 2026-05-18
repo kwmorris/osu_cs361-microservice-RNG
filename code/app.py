@@ -1,5 +1,6 @@
 from flask import Flask, request, abort
 import json
+from rand import generate_even
 
 app = Flask(__name__)
 
@@ -8,6 +9,10 @@ app = Flask(__name__)
 def default():
     # Assemble the query parameters into arguments to send to the generator
     args = parse_request_parameters(request.args)
+
+    # Call the generator
+    if args['bin_type'] == 'even':  # Even bins
+        args['random_numbers'] = generate_even(args['bin_count'], args['range'], args['count'])
 
     response_json = json.dumps(args)
     print(str(args), response_json)
@@ -31,7 +36,7 @@ def parse_request_parameters(request_args):
         except:
             # The requested count is not an integer. Respond with an error code and reason
             abort(400, f"Bad random number count. Requested count (\"{request_count}\") is not an integer.")
-    
+
 
     request_range = request.args.get('range', "0,1")
     if request_range is not None:
@@ -46,10 +51,10 @@ def parse_request_parameters(request_args):
                 abort(400, f"Bad random number range. Requested range (\"{request_range}\") cannot be converted to a range of numbers.")
         else:
             abort(400, f"Bad random number range. Requested range (\"{request_range}\") has an incorrect number of arguments. Should be 2.")
-    
-    args['bin_type'] = request.args.get('bin_type')
-    
-    args['bin_count'] = request.args.get('bin_count')
+
+    args['bin_type'] = request.args.get('bin_type', 'even')
+
+    args['bin_count'] = int(request.args.get('bin_count', 0))
 
     return args
 
