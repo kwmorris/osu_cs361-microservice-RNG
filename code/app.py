@@ -1,6 +1,5 @@
 from flask import Flask, request, abort
-import json
-from rand import generate_even
+import json, rand
 
 app = Flask(__name__)
 
@@ -12,7 +11,10 @@ def default():
 
     # Call the generator
     if args['bin_type'] == 'even':  # Even bins
-        args['random_numbers'] = generate_even(args['bin_count'], args['range'], args['count'])
+        args['random_numbers'] = rand.generate_even(args['bin_count'], args['range'], args['count'])
+    elif args['bin_type'] == 'int':
+        args['random_numbers'] = rand.generate_ints(args['range'], args['count'])
+
 
     response_json = json.dumps(args)
     print(str(args), response_json)
@@ -54,7 +56,7 @@ def parse_request_parameters(request_args):
 
     args['bin_type'] = request.args.get('bin_type', 'even')
 
-    args['bin_count'] = int(request.args.get('bin_count', 0))
+    args['bin_count'] = int(request.args.get('bin_count', 2))
 
     return args
 

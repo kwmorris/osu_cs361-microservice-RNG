@@ -34,7 +34,7 @@ def test_even_2():
     params = {
         "count": 20,
         "range": "10, 20",
-        "bin_count": 10
+        "bin_type": 'int'
     }
     r = requests.get(URL + '/', params=params)
     print("Test: 20 integers between (10, 20]")

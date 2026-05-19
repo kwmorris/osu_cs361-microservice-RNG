@@ -1,4 +1,4 @@
-import random
+import random, math
 
 def rand(count = 1):
     """
@@ -9,7 +9,7 @@ def rand(count = 1):
     random.seed()
     return [random.random() for _x in range(count)]
 
-def convert_to_range(nums: list, min, max, bin):
+def convert_to_range(nums: list, min, max, bin = None):
     """
     Converts a list of randomly generated numbers between [0, 1) to lie within
     the range of [min, max) according to a range and bin size.
@@ -23,6 +23,7 @@ def convert_to_range(nums: list, min, max, bin):
             num = (num // bin) * bin
         num += min
         nums[i] = num
+
 
 def generate_even(bin_count, range, count):
     """
@@ -41,6 +42,24 @@ def generate_even(bin_count, range, count):
     convert_to_range(nums, range[0], range[1], bin)
 
     return nums
+
+
+def generate_ints(range, count):
+    """
+    Generates a list of integers.
+    """
+    # generate random floats between (0, 1]
+    nums = rand(count)
+
+    # scale floats across range
+    convert_to_range(nums, range[0], range[1])
+
+    # Convert floats to lower int
+    for i, num in enumerate(nums):
+        nums[i] = math.floor(num)
+
+    return nums
+
 
 if __name__ == '__main__':
     test_count = 10
