@@ -3,13 +3,13 @@ The generation can be modified according to specifications that are included in 
 Once the numbers are generated, they're sent back as a list in the http response (JSON).
 
 Query parameters:
-> count: number of numbers to generate
-> range: minimum and maximum of the generated numbers. Must be integers in the format "min,max"
-> bin_type: determines the type of binning.
->> "even" (default): divides the range into the specified number of bins. The generated numbers will be rounded down to the nearest bin
->> "int": all generated numbers will be an integer within the given range. bin_count is ignored
+> count: number of numbers to generate  
+> range: minimum and maximum of the generated numbers. Must be integers in the format "min,max"  
+> bin_type: determines the type of binning.  
+>> "even" (default): divides the range into the specified number of bins. The generated numbers will be rounded down to the nearest bin  
+>> "int": all generated numbers will be an integer within the given range. bin_count is ignored  
 >
-> bin_count: the number of bins to be used with "even" bin_type. Leave empty or at 0 for no binning
+> bin_count: the number of bins to be used with "even" bin_type. Leave empty or at 0 for no binning  
 
 Response parameters:
 > (all query parameters are included in the response)
