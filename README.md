@@ -37,7 +37,7 @@ sequenceDiagram
     alt bin_type == "even"
         App->>Rand: generate_even(bin_count, range, count)
         Rand-->>App: [random numbers]
-    else bin_type == "other"
+    else bin_type == "int"
         App->>Rand: generate_ints(range, count)
         Rand-->>App: [random numbers]
     end
