@@ -18,7 +18,7 @@ def default():
 
     response_json = json.dumps(args)
     print(str(args), response_json)
-    return f"<p>{response_json}</p>"
+    return app.response_class(response_json, mimetype='application/json')
 
 
 def parse_request_parameters(request_args):
